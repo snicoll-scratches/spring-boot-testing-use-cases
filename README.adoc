@@ -1,22 +1,22 @@
 = Testing use cases
 
-This project gathers some testing use cases used on the field. They demonstrates areas
+This project gathers some testing use cases used on the field. They demonstrate areas
 where our support is lacking.
 
-== Primary mock (`spring-boot-testing-mock-primary`)
+== Primary mock
 
-Mocking a component that has certain dependencies can be hard. The
-`spring-boot-testing-mock-primary` project shows how the use of `@Primary` can be used to
-override a bean definition with a mock.
+Mocking a component that has certain dependencies can be hard, especially if it is injected
+by type in other component(s) in an integration test. The `spring-boot-testing-mock-primary`
+project shows how to use `@Primary` to override a bean definition with a mock.
 
 === Observations
 
 * The "production" instance is still created (albeit not injected in other components) so
 it must not do something on startup that requires a service connectivity
 * This seems like an _abusive_ use of `@Primary`
-* In order to control when the mock should or should not apply, these configuration
-elements must be put outside of the main package to prevent a default `@ComponentScan`
-config to pick them up
+* In order to control when the mock should or should not apply, these test configurations
+must be put outside of the main package to prevent a default `@ComponentScan` to pick them
+up
 
 The relation between `SampleApplication` and `ServerMockConfiguration` is also
 problematic. We may think that because the latter is added *after* the main test
