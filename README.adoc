@@ -32,5 +32,18 @@ components that are detected by component scan).
 * Can we improve the component scan to ignore certain configs by default? This would allow
 us *not* to put our mock config in a different package space
 
+== Test profile
+
+Another way to mock components is to define them in a `test` profile. To avoid defining them
+twice (as in the previous example), regular configuration may not use component scan for those
+and register them in a configuration class that is annotated `@Profile("!test")`. The
+`spring-boot-testing-profile` project demonstrates this.
+
+=== Observations
+
+* The configuration becomes quite hard to read with this profile _dance_ (in test, not in test).
+* This assumes that there is one testing configuration and one "production" configuration.
+Anything more complex would be quite hard to manage that way
+
 
 
