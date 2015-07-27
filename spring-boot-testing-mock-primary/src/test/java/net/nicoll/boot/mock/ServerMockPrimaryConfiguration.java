@@ -1,4 +1,6 @@
-package net.nicoll.boot.test.mock;
+package net.nicoll.boot.mock;
+
+import net.nicoll.boot.test.mock.BarService;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,7 +10,7 @@ import static org.mockito.BDDMockito.*;
 import static org.mockito.Mockito.mock;
 
 @Configuration
-public class ServerMockConfiguration {
+public class ServerMockPrimaryConfiguration {
 
 	@Primary
 	@Bean

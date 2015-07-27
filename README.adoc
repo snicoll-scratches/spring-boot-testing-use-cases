@@ -1,0 +1,36 @@
+= Testing use cases
+
+This project gathers some testing use cases used on the field. They demonstrates areas
+where our support is lacking.
+
+== Primary mock (`spring-boot-testing-mock-primary`)
+
+Mocking a component that has certain dependencies can be hard. The
+`spring-boot-testing-mock-primary` project shows how the use of `@Primary` can be used to
+override a bean definition with a mock.
+
+=== Observations
+
+* The "production" instance is still created (albeit not injected in other components) so
+it must not do something on startup that requires a service connectivity
+* This seems like an _abusive_ use of `@Primary`
+* In order to control when the mock should or should not apply, these configuration
+elements must be put outside of the main package to prevent a default `@ComponentScan`
+config to pick them up
+
+The relation between `SampleApplication` and `ServerMockConfiguration` is also
+problematic. We may think that because the latter is added *after* the main test
+configuration, any bean defined in the mock configuration can effectively override a
+matching bean in the main configuration. Unfortunately, `@ComponentScan` is applied at
+a latter stage and there might be no guarantee of what wins on what.
+
+=== Open questions
+
+* Can we improve the context initialization so that `@ComponentScan` provides a deterministic
+behaviour? (i.e. any class added *after* a `@SpringBootApplication` has a chance to override
+components that are detected by component scan).
+* Can we improve the component scan to ignore certain configs by default? This would allow
+us *not* to put our mock config in a different package space
+
+
+
