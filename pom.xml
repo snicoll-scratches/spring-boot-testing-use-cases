@@ -13,12 +13,13 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
 
-		<spring.boot.version>1.3.0.BUILD-SNAPSHOT</spring.boot.version>
+		<spring.boot.version>1.4.0.RC1</spring.boot.version>
 	</properties>
 
 	<modules>
 		<module>spring-boot-testing-mock-primary</module>
 		<module>spring-boot-testing-profile</module>
+		<module>spring-boot-testing-mock-bean</module>
 	</modules>
 
 	<dependencyManagement>

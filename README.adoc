@@ -1,7 +1,8 @@
 = Testing use cases
 
 This project gathers some testing use cases used on the field. They demonstrate areas
-where our support is lacking.
+where our support is lacking. This got handled as of Spring Boot 1.4 that has a
+https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-1.4.0-M2-Release-Notes#test-improvements[major overhaul of testing support].
 
 == Primary mock
 
@@ -45,5 +46,10 @@ and register them in a configuration class that is annotated `@Profile("!test")`
 * This assumes that there is one testing configuration and one "production" configuration.
 Anything more complex would be quite hard to manage that way
 
+== Mock Bean
 
-
+Spring Boot 1.4 introduces a new `MockBean` annotation that allows to handle mocks on a
+per test-basis. Just annotate any dependency you'd like to mock with `@MockBean` at the
+class level. Assertions can be written directly in your test and the mock is reset after
+each test automatically.  The `spring-boot-testing-mock-bean` project shows how to use
+this new feature.
